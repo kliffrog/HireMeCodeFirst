@@ -1,0 +1,35 @@
+﻿@model HireMeCodeFirst.ViewModels.UserAccountFormViewModel
+@{
+    ViewBag.Title = "New";
+}
+
+<h2>New Account</h2>
+
+@using (Html.BeginForm("Save", "UserAccount"))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.UserAccount.Email)
+        @Html.TextBoxFor(m => m.UserAccount.Email, new { @class = "form-group"})
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.UserAccount.Password)
+        @Html.PasswordFor(m => m.UserAccount.Password, new { @class = "form-group" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.UserAccount.UserTypeId)
+        @Html.DropDownListFor(m => m.UserAccount.UserTypeId, new SelectList(Model.UserTypes, "Id", "Name"), "Select User Type", new { @class = "form-group" })
+    </div>
+    <div class="checkbox">
+        <label>
+            @Html.CheckBoxFor(m => m.UserAccount.Enabled) Enabled
+        </label>
+    </div>
+    <div>
+        <label>
+            @Html.TextBoxFor(m => m.UserAccount.RegistrationDate, new { @Value = @DateTime.Now.ToShortDateString() })
+        </label>
+    </div>
+    @Html.HiddenFor(m => m.UserAccount.Id)
+    @Html.HiddenFor(m => m.UserAccount.RegistrationDate)
+    <button type="submit" class="btn btn-primary">Register</button>
+}

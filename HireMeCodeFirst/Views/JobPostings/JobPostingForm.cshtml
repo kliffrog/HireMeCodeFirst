@@ -1,0 +1,83 @@
+﻿@model HireMeCodeFirst.ViewModels.PostingFormViewModel
+@{
+    ViewBag.Title = "New";
+}
+
+<h2>New Posting</h2>
+
+@using (Html.BeginForm("Save", "JobPostings"))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.JobPosting.JobTitle)
+        @Html.TextBoxFor(m => m.JobPosting.JobTitle, new { @class = "form-group" })
+        @Html.ValidationMessageFor(m => m.JobPosting.JobTitle)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.JobPosting.JobDescription)
+        @Html.TextBoxFor(m => m.JobPosting.JobDescription, new { @class = "form-group" })
+        @Html.ValidationMessageFor(m => m.JobPosting.JobDescription)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.JobPosting.JobTypeId)
+        @Html.DropDownListFor(m => m.JobPosting.JobTypeId, new SelectList(Model.JobTypes, "Id", "Name"), "Select Job Type", new { @class = "form-group" })
+        @Html.ValidationMessageFor(m => m.JobPosting.JobTypeId)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.JobPosting.ApplicationInstructions)
+        @Html.TextBoxFor(m => m.JobPosting.ApplicationInstructions, new { @class = "form-group" })
+        @Html.ValidationMessageFor(m => m.JobPosting.ApplicationInstructions)
+    </div>    
+    <div class="form-group">
+        @Html.LabelFor(m => m.JobPosting.ApplicationWebsite)
+        @Html.TextBoxFor(m => m.JobPosting.ApplicationWebsite, new { @class = "form-group" })
+        @Html.ValidationMessageFor(m => m.JobPosting.ApplicationWebsite)
+    </div>    
+    <div class="form-group">
+        @Html.LabelFor(m => m.JobPosting.Qualifications)
+        @Html.TextBoxFor(m => m.JobPosting.Qualifications, new { @class = "form-group" })
+        @Html.ValidationMessageFor(m => m.JobPosting.Qualifications)
+    </div>    
+    <div class="form-group">
+        @Html.LabelFor(m => m.JobPosting.NumOpenings)
+        @Html.TextBoxFor(m => m.JobPosting.NumOpenings, new { @class = "form-group" })
+        @Html.ValidationMessageFor(m => m.JobPosting.NumOpenings)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.JobPosting.HoursPerWeek)
+        @Html.TextBoxFor(m => m.JobPosting.HoursPerWeek, new { @class = "form-group" })
+        @Html.ValidationMessageFor(m => m.JobPosting.HoursPerWeek)
+    </div>    
+    <div class="form-group">
+        @Html.LabelFor(m => m.JobPosting.WageSalary)
+        @Html.TextBoxFor(m => m.JobPosting.WageSalary, new { @class = "form-group" })
+        @Html.ValidationMessageFor(m => m.JobPosting.WageSalary)
+    </div>    
+    <div class="form-group">
+        @Html.LabelFor(m => m.JobPosting.StartDate)
+        @Html.EditorFor(m => m.JobPosting.StartDate, new { @class = "date" })
+        @Html.ValidationMessageFor(m => m.JobPosting.StartDate)
+    </div>    
+    <div class="form-group">
+        @Html.LabelFor(m => m.JobPosting.EndDate)
+        @Html.EditorFor(m => m.JobPosting.EndDate, new { @class = "date" })
+        @Html.ValidationMessageFor(m => m.JobPosting.EndDate)
+    </div>    
+    <div class="form-group">
+        @Html.LabelFor(m => m.JobPosting.ExpirationDate)
+        @Html.EditorFor(m => m.JobPosting.ExpirationDate, new { @class = "date" })
+        @Html.ValidationMessageFor(m => m.JobPosting.ExpirationDate)
+    </div>
+
+    
+
+    @Html.HiddenFor(m => m.JobPosting.UserAccount)
+    @Html.HiddenFor(m => m.JobPosting.JobLocationId)
+    @Html.HiddenFor(m => m.JobPosting.CreatedDate)
+    @Html.HiddenFor(m => m.JobPosting.CompanyId)
+    @Html.HiddenFor(m => m.JobPosting.Company)
+    @Html.HiddenFor(m => m.JobPosting.Id)
+    @Html.HiddenFor(m => m.JobPosting.NumViews)
+    @Html.HiddenFor(m => m.JobPosting.Enabled)
+    @Html.HiddenFor(m => m.JobPosting.PostingDate)
+    <button type="submit" class="btn btn-primary">Register</button>
+}

@@ -169,17 +169,142 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\JobPostingsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\UserAccountController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711190240121_InitialModel.cs" />
+    <Compile Include="Migrations\201711190240121_InitialModel.Designer.cs">
+      <DependentUpon>201711190240121_InitialModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711190633317_CompanyLogo.cs" />
+    <Compile Include="Migrations\201711190633317_CompanyLogo.Designer.cs">
+      <DependentUpon>201711190633317_CompanyLogo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711190636195_EducationDetail.cs" />
+    <Compile Include="Migrations\201711190636195_EducationDetail.Designer.cs">
+      <DependentUpon>201711190636195_EducationDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711190638013_JobApplicationStatus.cs" />
+    <Compile Include="Migrations\201711190638013_JobApplicationStatus.Designer.cs">
+      <DependentUpon>201711190638013_JobApplicationStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711192054545_JobPostAction.cs" />
+    <Compile Include="Migrations\201711192054545_JobPostAction.Designer.cs">
+      <DependentUpon>201711192054545_JobPostAction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711192056556_JobPostActivity.cs" />
+    <Compile Include="Migrations\201711192056556_JobPostActivity.Designer.cs">
+      <DependentUpon>201711192056556_JobPostActivity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711192109228_JobPostActivityLog.cs" />
+    <Compile Include="Migrations\201711192109228_JobPostActivityLog.Designer.cs">
+      <DependentUpon>201711192109228_JobPostActivityLog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711192117268_JobPostSkillSet.cs" />
+    <Compile Include="Migrations\201711192117268_JobPostSkillSet.Designer.cs">
+      <DependentUpon>201711192117268_JobPostSkillSet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711192118458_SkillSet.cs" />
+    <Compile Include="Migrations\201711192118458_SkillSet.Designer.cs">
+      <DependentUpon>201711192118458_SkillSet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711192120160_StudentExperience.cs" />
+    <Compile Include="Migrations\201711192120160_StudentExperience.Designer.cs">
+      <DependentUpon>201711192120160_StudentExperience.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711192121258_StudentProfile.cs" />
+    <Compile Include="Migrations\201711192121258_StudentProfile.Designer.cs">
+      <DependentUpon>201711192121258_StudentProfile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711192130216_StudentSkillSet.cs" />
+    <Compile Include="Migrations\201711192130216_StudentSkillSet.Designer.cs">
+      <DependentUpon>201711192130216_StudentSkillSet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711192131599_UserLog.cs" />
+    <Compile Include="Migrations\201711192131599_UserLog.Designer.cs">
+      <DependentUpon>201711192131599_UserLog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711192134399_UserType.cs" />
+    <Compile Include="Migrations\201711192134399_UserType.Designer.cs">
+      <DependentUpon>201711192134399_UserType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711192143414_BusinessIndustry.cs" />
+    <Compile Include="Migrations\201711192143414_BusinessIndustry.Designer.cs">
+      <DependentUpon>201711192143414_BusinessIndustry.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711192214555_PopulateBusinessIndustry.cs" />
+    <Compile Include="Migrations\201711192214555_PopulateBusinessIndustry.Designer.cs">
+      <DependentUpon>201711192214555_PopulateBusinessIndustry.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711192235397_PopulateBusinessIndustry1.cs" />
+    <Compile Include="Migrations\201711192235397_PopulateBusinessIndustry1.Designer.cs">
+      <DependentUpon>201711192235397_PopulateBusinessIndustry1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711192247307_PopulateUserType.cs" />
+    <Compile Include="Migrations\201711192247307_PopulateUserType.Designer.cs">
+      <DependentUpon>201711192247307_PopulateUserType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711192320537_PopulateJobType.cs" />
+    <Compile Include="Migrations\201711192320537_PopulateJobType.Designer.cs">
+      <DependentUpon>201711192320537_PopulateJobType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711230346403_FormValidation.cs" />
+    <Compile Include="Migrations\201711230346403_FormValidation.Designer.cs">
+      <DependentUpon>201711230346403_FormValidation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711230523358_PopulateCompanies.cs" />
+    <Compile Include="Migrations\201711230523358_PopulateCompanies.Designer.cs">
+      <DependentUpon>201711230523358_PopulateCompanies.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711230621092_PopulateCompanies1.cs" />
+    <Compile Include="Migrations\201711230621092_PopulateCompanies1.Designer.cs">
+      <DependentUpon>201711230621092_PopulateCompanies1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711232300026_VerifyPassword.cs" />
+    <Compile Include="Migrations\201711232300026_VerifyPassword.Designer.cs">
+      <DependentUpon>201711232300026_VerifyPassword.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711240003280_PostingDates.cs" />
+    <Compile Include="Migrations\201711240003280_PostingDates.Designer.cs">
+      <DependentUpon>201711240003280_PostingDates.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711240438294_CreateUsers.cs" />
+    <Compile Include="Migrations\201711240438294_CreateUsers.Designer.cs">
+      <DependentUpon>201711240438294_CreateUsers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\BusinessIndustry.cs" />
+    <Compile Include="Models\Company.cs" />
+    <Compile Include="Models\CompanyLogo.cs" />
+    <Compile Include="Models\EducationDetail.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\JobApplicationStatus.cs" />
+    <Compile Include="Models\JobLocation.cs" />
+    <Compile Include="Models\JobPostAction.cs" />
+    <Compile Include="Models\JobPostActivity.cs" />
+    <Compile Include="Models\JobPostActivityLog.cs" />
+    <Compile Include="Models\JobPostSkillSet.cs" />
+    <Compile Include="Models\JobType.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\JobPosting.cs" />
+    <Compile Include="Models\SkillSet.cs" />
+    <Compile Include="Models\StudentExperience.cs" />
+    <Compile Include="Models\StudentProfile.cs" />
+    <Compile Include="Models\StudentSkillSet.cs" />
+    <Compile Include="Models\UserAccount.cs" />
+    <Compile Include="Models\UserLog.cs" />
+    <Compile Include="Models\UserType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\PostingFormViewModel.cs" />
+    <Compile Include="ViewModels\UserAccountFormViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-spacelab.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -234,6 +359,18 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\JobPostings\Create.cshtml" />
+    <Content Include="Views\JobPostings\Delete.cshtml" />
+    <Content Include="Views\JobPostings\Details.cshtml" />
+    <Content Include="Views\JobPostings\Edit.cshtml" />
+    <Content Include="Views\JobPostings\Index.cshtml" />
+    <Content Include="Views\UserAccounts\Create.cshtml" />
+    <Content Include="Views\UserAccount\Delete.cshtml" />
+    <Content Include="Views\UserAccount\Details.cshtml" />
+    <Content Include="Views\UserAccount\Edit.cshtml" />
+    <Content Include="Views\UserAccount\Index.cshtml" />
+    <Content Include="Views\UserAccount\UserAccountForm.cshtml" />
+    <Content Include="Views\JobPostings\JobPostingForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -245,6 +382,83 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201711190240121_InitialModel.resx">
+      <DependentUpon>201711190240121_InitialModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711190633317_CompanyLogo.resx">
+      <DependentUpon>201711190633317_CompanyLogo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711190636195_EducationDetail.resx">
+      <DependentUpon>201711190636195_EducationDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711190638013_JobApplicationStatus.resx">
+      <DependentUpon>201711190638013_JobApplicationStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711192054545_JobPostAction.resx">
+      <DependentUpon>201711192054545_JobPostAction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711192056556_JobPostActivity.resx">
+      <DependentUpon>201711192056556_JobPostActivity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711192109228_JobPostActivityLog.resx">
+      <DependentUpon>201711192109228_JobPostActivityLog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711192117268_JobPostSkillSet.resx">
+      <DependentUpon>201711192117268_JobPostSkillSet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711192118458_SkillSet.resx">
+      <DependentUpon>201711192118458_SkillSet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711192120160_StudentExperience.resx">
+      <DependentUpon>201711192120160_StudentExperience.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711192121258_StudentProfile.resx">
+      <DependentUpon>201711192121258_StudentProfile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711192130216_StudentSkillSet.resx">
+      <DependentUpon>201711192130216_StudentSkillSet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711192131599_UserLog.resx">
+      <DependentUpon>201711192131599_UserLog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711192134399_UserType.resx">
+      <DependentUpon>201711192134399_UserType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711192143414_BusinessIndustry.resx">
+      <DependentUpon>201711192143414_BusinessIndustry.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711192214555_PopulateBusinessIndustry.resx">
+      <DependentUpon>201711192214555_PopulateBusinessIndustry.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711192235397_PopulateBusinessIndustry1.resx">
+      <DependentUpon>201711192235397_PopulateBusinessIndustry1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711192247307_PopulateUserType.resx">
+      <DependentUpon>201711192247307_PopulateUserType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711192320537_PopulateJobType.resx">
+      <DependentUpon>201711192320537_PopulateJobType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711230346403_FormValidation.resx">
+      <DependentUpon>201711230346403_FormValidation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711230523358_PopulateCompanies.resx">
+      <DependentUpon>201711230523358_PopulateCompanies.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711230621092_PopulateCompanies1.resx">
+      <DependentUpon>201711230621092_PopulateCompanies1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711232300026_VerifyPassword.resx">
+      <DependentUpon>201711232300026_VerifyPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711240003280_PostingDates.resx">
+      <DependentUpon>201711240003280_PostingDates.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711240438294_CreateUsers.resx">
+      <DependentUpon>201711240438294_CreateUsers.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
