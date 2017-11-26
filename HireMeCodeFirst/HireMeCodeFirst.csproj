@@ -291,6 +291,7 @@
     <Compile Include="Models\JobType.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\JobPosting.cs" />
+    <Compile Include="Models\RoleName.cs" />
     <Compile Include="Models\SkillSet.cs" />
     <Compile Include="Models\StudentExperience.cs" />
     <Compile Include="Models\StudentProfile.cs" />
@@ -371,6 +372,7 @@
     <Content Include="Views\UserAccount\Index.cshtml" />
     <Content Include="Views\UserAccount\UserAccountForm.cshtml" />
     <Content Include="Views\JobPostings\JobPostingForm.cshtml" />
+    <Content Include="Views\JobPostings\ReadOnlyIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

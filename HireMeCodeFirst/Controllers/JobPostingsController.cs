@@ -20,6 +20,13 @@ namespace HireMeCodeFirst.Controllers
             db = new ApplicationDbContext();
         }
 
+       /* public ViewResult Index()
+        {
+            if (User.IsInRole(RoleName.CanManageMovies))
+                return View("Index");
+            return View("ReadOnlyIndex");
+        }*/
+
         // GET: JobPostings
         public ActionResult Index()
         {
@@ -73,7 +80,8 @@ namespace HireMeCodeFirst.Controllers
             return View(jobPosting);
         }
 
-        public ActionResult New()
+        [Authorize(Roles=RoleName.CanManagePostings)]
+        public ViewResult New()
         {
             var jobTypes = db.JobTypes.ToList();
             var jobLocations = db.JobLocations.ToList();
