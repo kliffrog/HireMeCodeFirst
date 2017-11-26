@@ -20,19 +20,23 @@ namespace HireMeCodeFirst.Controllers
             db = new ApplicationDbContext();
         }
 
-       /* public ViewResult Index()
+        public ViewResult Index()
         {
-            if (User.IsInRole(RoleName.CanManageMovies))
-                return View("Index");
-            return View("ReadOnlyIndex");
-        }*/
+            var jobPostings = db.JobPostings.Include(j => j.Company).Include(j => j.JobLocation).Include(j => j.JobType).Include(j => j.UserAccount);
+            if (User.IsInRole(RoleName.CanManagePostings))
+            {
+                
+                return View(jobPostings.ToList());
+            }
+            return View("ReadOnlyIndex", jobPostings);
+        }
 
         // GET: JobPostings
-        public ActionResult Index()
+        /*public ActionResult Index()
         {
             var jobPostings = db.JobPostings.Include(j => j.Company).Include(j => j.JobLocation).Include(j => j.JobType).Include(j => j.UserAccount);
             return View(jobPostings.ToList());
-        }
+        }*/
 
         // GET: JobPostings/Details/5
         public ActionResult Details(int? id)
