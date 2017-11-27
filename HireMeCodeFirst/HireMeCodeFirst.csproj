@@ -275,6 +275,10 @@
     <Compile Include="Migrations\201711240438294_CreateUsers.Designer.cs">
       <DependentUpon>201711240438294_CreateUsers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711270614228_updateaccountIdJobPosting.cs" />
+    <Compile Include="Migrations\201711270614228_updateaccountIdJobPosting.Designer.cs">
+      <DependentUpon>201711270614228_updateaccountIdJobPosting.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BusinessIndustry.cs" />
@@ -460,6 +464,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711240438294_CreateUsers.resx">
       <DependentUpon>201711240438294_CreateUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711270614228_updateaccountIdJobPosting.resx">
+      <DependentUpon>201711270614228_updateaccountIdJobPosting.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

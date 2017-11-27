@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using HireMeCodeFirst.Models;
 using HireMeCodeFirst.ViewModels;
+using Microsoft.AspNet.Identity;
 
 namespace HireMeCodeFirst.Controllers
 {
@@ -117,7 +118,7 @@ namespace HireMeCodeFirst.Controllers
             {
                 var JobPostingInDb = db.JobPostings.Single(c => c.Id == jobPosting.Id);
 
-                JobPostingInDb.UserAccountId = 2;
+                JobPostingInDb.UserAccountId = User.Identity.GetUserId();
                 JobPostingInDb.ApplicationInstructions = jobPosting.ApplicationInstructions;
                 JobPostingInDb.ApplicationWebsite = jobPosting.ApplicationWebsite;
                 JobPostingInDb.CompanyId = jobPosting.CompanyId;
