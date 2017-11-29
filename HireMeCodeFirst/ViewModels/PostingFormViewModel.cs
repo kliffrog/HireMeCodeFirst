@@ -11,5 +11,6 @@ namespace HireMeCodeFirst.ViewModels
         public IEnumerable<JobType> JobTypes { get; set; }
         public IEnumerable<JobLocation> JobLocations { get; set; }
         public JobPosting JobPosting { get; set; }
+        public Company Company { get; set; }
     }
 }

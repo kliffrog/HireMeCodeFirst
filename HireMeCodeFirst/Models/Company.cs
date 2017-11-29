@@ -11,7 +11,7 @@ namespace HireMeCodeFirst.Models
         [Key]
         public int Id { get; set; }
         public UserAccount UserAccount { get; set; }
-        public int UserAccountId { get; set; }
+        public string UserAccountId { get; set; }
 
         public string Name { get; set; }
         public string Description { get; set; }

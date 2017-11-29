@@ -17,9 +17,8 @@ namespace HireMeCodeFirst.Models
         public int CompanyId { get; set; }
         public JobLocation JobLocation { get; set; }
         public int JobLocationId { get; set; }
-        public UserAccount UserAccount { get; set; }
-        public string UserAccountId { get; set; }
-        public DateTime CreatedDate { get; set; }
+
+        public DateTime? CreatedDate { get; set; }
         [Required]
         [Display(Name="Job Title")]
         public string JobTitle { get; set; }
@@ -34,10 +33,10 @@ namespace HireMeCodeFirst.Models
         public decimal WageSalary { get; set; }
         [Display(Name = "Start Date")]
         [DataType(DataType.Date)]
-        public DateTime StartDate { get; set; }
+        public DateTime? StartDate { get; set; }
         [Display(Name = "End Date")]
         [DataType(DataType.Date)]
-        public DateTime EndDate { get; set; }
+        public DateTime? EndDate { get; set; }
         public string Qualifications { get; set; }
         [Display(Name = "Application Instructions")]
         public string ApplicationInstructions { get; set; }
@@ -45,11 +44,11 @@ namespace HireMeCodeFirst.Models
         public string ApplicationWebsite { get; set; }
         [Display(Name = "Posting Date")]
         [DataType(DataType.Date)]
-        public DateTime PostingDate { get; set; }
+        public DateTime? PostingDate { get; set; }
 
         [Display(Name = "Expiration Date")]
         [DataType(DataType.Date)]
-        public DateTime ExpirationDate { get; set; }
+        public DateTime? ExpirationDate { get; set; }
         public bool Enabled { get; set; }
         [Display(Name = "Number of Views")]
         public int NumViews { get; set; }

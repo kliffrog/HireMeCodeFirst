@@ -279,6 +279,18 @@
     <Compile Include="Migrations\201711270614228_updateaccountIdJobPosting.Designer.cs">
       <DependentUpon>201711270614228_updateaccountIdJobPosting.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711280609265_updateJobPostingDatesNullable.cs" />
+    <Compile Include="Migrations\201711280609265_updateJobPostingDatesNullable.Designer.cs">
+      <DependentUpon>201711280609265_updateJobPostingDatesNullable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711290448568_RemoveUserAccountIdFromJobPostings.cs" />
+    <Compile Include="Migrations\201711290448568_RemoveUserAccountIdFromJobPostings.Designer.cs">
+      <DependentUpon>201711290448568_RemoveUserAccountIdFromJobPostings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711290602393_UpdateUserAccountIdCompanyTable.cs" />
+    <Compile Include="Migrations\201711290602393_UpdateUserAccountIdCompanyTable.Designer.cs">
+      <DependentUpon>201711290602393_UpdateUserAccountIdCompanyTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BusinessIndustry.cs" />
@@ -312,6 +324,7 @@
     <Content Include="Content\bootstrap-spacelab.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Sitek.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -467,6 +480,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711270614228_updateaccountIdJobPosting.resx">
       <DependentUpon>201711270614228_updateaccountIdJobPosting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711280609265_updateJobPostingDatesNullable.resx">
+      <DependentUpon>201711280609265_updateJobPostingDatesNullable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711290448568_RemoveUserAccountIdFromJobPostings.resx">
+      <DependentUpon>201711290448568_RemoveUserAccountIdFromJobPostings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711290602393_UpdateUserAccountIdCompanyTable.resx">
+      <DependentUpon>201711290602393_UpdateUserAccountIdCompanyTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

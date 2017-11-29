@@ -23,7 +23,7 @@ namespace HireMeCodeFirst.Controllers
 
         public ViewResult Index()
         {
-            var jobPostings = db.JobPostings.Include(j => j.Company).Include(j => j.JobLocation).Include(j => j.JobType).Include(j => j.UserAccount);
+            var jobPostings = db.JobPostings.Include(j => j.Company).Include(j => j.JobLocation).Include(j => j.JobType);
             if (User.IsInRole(RoleName.CanManagePostings))
             {
                 
@@ -81,7 +81,6 @@ namespace HireMeCodeFirst.Controllers
             ViewBag.Id = new SelectList(db.Companies, "Id", "Name", jobPosting.Id);
             ViewBag.JobLocationId = new SelectList(db.JobLocations, "Id", "Address1", jobPosting.JobLocationId);
             ViewBag.JobTypeId = new SelectList(db.JobTypes, "Id", "Name", jobPosting.JobTypeId);
-            ViewBag.UserAccountId = new SelectList(db.UserAccounts, "Id", "Email", jobPosting.UserAccountId);
             return View(jobPosting);
         }
 
@@ -102,7 +101,7 @@ namespace HireMeCodeFirst.Controllers
         [HttpPost]
         public ActionResult Save(JobPosting jobPosting)
         {
-            if (!ModelState.IsValid)
+            /*if (!ModelState.IsValid)
             {
                 var viewModel = new PostingFormViewModel()
                 {
@@ -111,17 +110,16 @@ namespace HireMeCodeFirst.Controllers
                     JobLocations = db.JobLocations
                 };
                 return View("JobPostingForm",viewModel);
-            }
+            }*/
             if (jobPosting.Id == 0)
                 db.JobPostings.Add(jobPosting);
             else
             {
                 var JobPostingInDb = db.JobPostings.Single(c => c.Id == jobPosting.Id);
-
-                JobPostingInDb.UserAccountId = User.Identity.GetUserId();
+                
                 JobPostingInDb.ApplicationInstructions = jobPosting.ApplicationInstructions;
                 JobPostingInDb.ApplicationWebsite = jobPosting.ApplicationWebsite;
-                JobPostingInDb.CompanyId = jobPosting.CompanyId;
+                JobPostingInDb.CompanyId = 1;
                 JobPostingInDb.CreatedDate = DateTime.Now;
                 JobPostingInDb.Enabled = false;
                 JobPostingInDb.EndDate = jobPosting.EndDate;
@@ -133,7 +131,7 @@ namespace HireMeCodeFirst.Controllers
                 JobPostingInDb.JobTypeId = jobPosting.JobTypeId;
                 JobPostingInDb.NumOpenings = jobPosting.NumOpenings;
                 JobPostingInDb.NumViews = 0;
-                JobPostingInDb.PostingDate = jobPosting.PostingDate;
+                JobPostingInDb.PostingDate = DateTime.Now;
                 JobPostingInDb.StartDate = jobPosting.StartDate;
                 JobPostingInDb.Qualifications = jobPosting.Qualifications;
                 JobPostingInDb.WageSalary = jobPosting.WageSalary;
@@ -157,7 +155,6 @@ namespace HireMeCodeFirst.Controllers
             ViewBag.Id = new SelectList(db.Companies, "Id", "Name", jobPosting.Id);
             ViewBag.JobLocationId = new SelectList(db.JobLocations, "Id", "Address1", jobPosting.JobLocationId);
             ViewBag.JobTypeId = new SelectList(db.JobTypes, "Id", "Name", jobPosting.JobTypeId);
-            ViewBag.UserAccountId = new SelectList(db.UserAccounts, "Id", "Email", jobPosting.UserAccountId);
             return View(jobPosting);
         }
 
@@ -177,7 +174,6 @@ namespace HireMeCodeFirst.Controllers
             ViewBag.Id = new SelectList(db.Companies, "Id", "Name", jobPosting.Id);
             ViewBag.JobLocationId = new SelectList(db.JobLocations, "Id", "Address1", jobPosting.JobLocationId);
             ViewBag.JobTypeId = new SelectList(db.JobTypes, "Id", "Name", jobPosting.JobTypeId);
-            ViewBag.UserAccountId = new SelectList(db.UserAccounts, "Id", "Email", jobPosting.UserAccountId);
             return View(jobPosting);
         }
 
