@@ -13,8 +13,9 @@ namespace HireMeCodeFirst.Models
         public int Id { get; set; }
         public Company Company { get; set; }
         public int CompanyId { get; set; }
-
+        [Display(Name = "Address")]
         public string Address1 { get; set; }
+        [Display(Name = "")]
         public string Address2 { get; set; }
         public string City { get; set; }
         public string State { get; set; }

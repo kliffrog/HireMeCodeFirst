@@ -17,7 +17,7 @@ namespace HireMeCodeFirst.Models
         public int CompanyId { get; set; }
         public JobLocation JobLocation { get; set; }
         public int JobLocationId { get; set; }
-
+        [Display(Name="Date Created")]
         public DateTime? CreatedDate { get; set; }
         [Required]
         [Display(Name="Job Title")]

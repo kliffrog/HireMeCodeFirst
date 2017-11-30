@@ -291,6 +291,10 @@
     <Compile Include="Migrations\201711290602393_UpdateUserAccountIdCompanyTable.Designer.cs">
       <DependentUpon>201711290602393_UpdateUserAccountIdCompanyTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711292316435_AddDisplayNames.cs" />
+    <Compile Include="Migrations\201711292316435_AddDisplayNames.Designer.cs">
+      <DependentUpon>201711292316435_AddDisplayNames.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BusinessIndustry.cs" />
@@ -489,6 +493,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711290602393_UpdateUserAccountIdCompanyTable.resx">
       <DependentUpon>201711290602393_UpdateUserAccountIdCompanyTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711292316435_AddDisplayNames.resx">
+      <DependentUpon>201711292316435_AddDisplayNames.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

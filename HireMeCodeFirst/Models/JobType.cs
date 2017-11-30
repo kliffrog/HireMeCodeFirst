@@ -10,7 +10,7 @@ namespace HireMeCodeFirst.Models
     {
         [Key]
         public int Id { get; set; }
-
+        [Display(Name = "Job Type")]
         public string Name { get; set; }
     }
 }
