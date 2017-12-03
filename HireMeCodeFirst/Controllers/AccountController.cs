@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls.Expressions;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -13,15 +15,20 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace HireMeCodeFirst.Controllers
 {
+
+
     [Authorize]
     public class AccountController : Controller
     {
-        private ApplicationSignInManager _signInManager;
-        private ApplicationUserManager _userManager;
+        private ApplicationDbContext db;
 
         public AccountController()
         {
+            db = new ApplicationDbContext();
         }
+
+        private ApplicationSignInManager _signInManager;
+        private ApplicationUserManager _userManager;
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
         {
@@ -52,6 +59,8 @@ namespace HireMeCodeFirst.Controllers
                 _userManager = value;
             }
         }
+
+
 
         //
         // GET: /Account/Login
@@ -484,5 +493,50 @@ namespace HireMeCodeFirst.Controllers
             }
         }
         #endregion
+
+        public ActionResult AdminIndex()
+        {
+            var userAccounts = db.Users.Include(c => c.UserType).ToList().OrderBy(c => c.Enabled).ThenBy(c => c.Email);
+            return View(userAccounts);
+        }
+
+        public ActionResult Edit(string id)
+        {
+            var account = db.Users.SingleOrDefault(c => c.Id == id);
+
+            if (account == null)
+                return HttpNotFound();
+            ViewBag.UserTypeId = new SelectList(db.UserTypes, "Id", "Name", account.UserTypeId);
+
+            return View(account);
+        }
+        [HttpPost]
+        public ActionResult Save( ApplicationUser user)
+        {
+            if (user.Id == "")
+                db.Users.Add(user);
+            else
+            {
+                var UserInDb = db.Users.Single(c => c.Id == user.Id);
+
+                UserInDb.RegistrationDate = user.RegistrationDate;
+                UserInDb.Email = user.Email;
+                UserInDb.LockoutEndDateUtc = user.LockoutEndDateUtc;
+                UserInDb.LockoutEnabled = user.LockoutEnabled;
+                UserInDb.Enabled = user.Enabled;
+                UserInDb.PhoneNumber = user.PhoneNumber;
+                UserInDb.PhoneNumberConfirmed = user.PhoneNumberConfirmed;
+                UserInDb.PasswordHash = user.PasswordHash;
+                UserInDb.UserName = user.UserName;
+                UserInDb.AccessFailedCount = user.AccessFailedCount;
+                UserInDb.EmailConfirmed = user.EmailConfirmed;
+                UserInDb.SecurityStamp = user.SecurityStamp;
+                UserInDb.TwoFactorEnabled = user.TwoFactorEnabled;
+                UserInDb.UserTypeId = user.UserTypeId;
+            }
+            db.SaveChanges();
+            return RedirectToAction("AdminIndex", "Account");
+        }
+
     }
 }
