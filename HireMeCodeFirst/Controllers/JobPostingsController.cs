@@ -10,16 +10,22 @@ using HireMeCodeFirst.Models;
 using HireMeCodeFirst.ViewModels;
 using Microsoft.AspNet.Identity;
 
+
+using System.Linq.Dynamic;
+using PagedList;
+
+
 namespace HireMeCodeFirst.Controllers
 {
     public class JobPostingsController : Controller
     {
         private ApplicationDbContext db;
-
         public JobPostingsController()
         {
             db = new ApplicationDbContext();
         }
+
+        
 
         public ViewResult Index()
         {
@@ -40,6 +46,7 @@ namespace HireMeCodeFirst.Controllers
         }*/
 
         // GET: JobPostings/Details/5
+        
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -54,6 +61,8 @@ namespace HireMeCodeFirst.Controllers
             return View(jobPosting);
         }
 
+       
+
         // GET: JobPostings/Create
         public ActionResult Create()
         {
@@ -63,6 +72,8 @@ namespace HireMeCodeFirst.Controllers
             ViewBag.UserAccountId = new SelectList(db.UserAccounts, "Id", "Email");
             return View();
         }
+
+        
 
         // POST: JobPostings/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -98,6 +109,8 @@ namespace HireMeCodeFirst.Controllers
             return View("JobPostingForm", viewModel);
         }
 
+
+      
         [HttpPost]
         public ActionResult Save(JobPosting jobPosting)
         {
@@ -140,6 +153,8 @@ namespace HireMeCodeFirst.Controllers
             return RedirectToAction("Index", "JobPostings");
         }
 
+       
+
         // GET: JobPostings/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -161,6 +176,8 @@ namespace HireMeCodeFirst.Controllers
         // POST: JobPostings/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,JobTypeId,CompanyId,JobLocationId,UserAccountId,CreatedDate,JobTitle,JobDescription,NumOpenings,HoursPerWeek,WageSalary,StartDate,EndDate,Qualifications,ApplicationInstructions,ApplicationWebsite,PostingDate,ExpirationDate,Enabled,NumViews")] JobPosting jobPosting)
@@ -202,6 +219,57 @@ namespace HireMeCodeFirst.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+      
+
+          public ActionResult JobSearch()
+           {
+               //Bind Industry drop down in search
+
+               ViewBag.IndustriesIndustryName = new SelectList(db.BusinessIndustries, "Name", "Name");
+            
+
+           var model = new SearchViewModel();
+
+           
+
+
+                var results = db.JobPostings.Include(j => j.Company).Include(j => j.JobLocation).Include(j => j.JobType).Include(j => j.Company.BusinessIndustry)
+                    .Where(
+                p =>
+                
+                (model.JobTitle == null || p.JobTitle.StartsWith(model.JobTitle))
+                && (model.Company.BusinessIndustry.Name == null || p.Company.BusinessIndustry.Name == model.Company.BusinessIndustry.Name)
+                && (model.Company.Name == null || p.Company.Name.Equals(model.Company.Name))
+                && (model.JobType.Name == null || p.JobType.Name.StartsWith(model.JobType.Name)))
+
+                        
+                        .OrderBy(p => p.CreatedDate);
+   
+            
+
+            return View(model);
+          
+           }
+
+       
+
+     
+        public ActionResult SearchDetails(int? id)
+           {
+               if (id == null)
+               {
+                   return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+               }
+               JobPosting jobPosting = db.JobPostings.Find(id);
+               if (jobPosting == null)
+               {
+                   return HttpNotFound();
+               }
+               return View(jobPosting);
+           }
+
+
 
         protected override void Dispose(bool disposing)
         {
