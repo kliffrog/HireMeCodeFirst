@@ -29,7 +29,7 @@ namespace HireMeCodeFirst.Controllers
             var userAccounts = _context.UserAccounts.ToList();
             return View(userAccounts);
         }
-        public ActionResult New()
+  /*      public ActionResult New()
         {
             var userTypes = _context.UserTypes.ToList();
             var viewModel = new UserAccountFormViewModel
@@ -37,7 +37,7 @@ namespace HireMeCodeFirst.Controllers
                 UserTypes = userTypes
             };
             return View("UserAccountForm", viewModel);
-        }
+        }*/
         [HttpPost]
         public ActionResult Save(UserAccount userAccount)
         {
@@ -69,7 +69,7 @@ namespace HireMeCodeFirst.Controllers
             return View(useraccount);
         }
 
-        public ActionResult Edit(int Id)
+/*        public ActionResult Edit(int Id)
         {
             var userAccount = _context.UserAccounts.SingleOrDefault(c => c.Id == Id);
             if (userAccount == null)
@@ -84,6 +84,6 @@ namespace HireMeCodeFirst.Controllers
             };
             
             return View("UserAccountForm", viewModel);
-        }
+        }*/
     }
 }

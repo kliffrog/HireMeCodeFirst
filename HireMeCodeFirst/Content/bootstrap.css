@@ -1717,7 +1717,7 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 .form-control {
-  display: block;
+
   width: 100%;
   height: 34px;
   padding: 6px 12px;
@@ -1758,7 +1758,7 @@ textarea.form-control {
 
 .radio,
 .checkbox {
-  display: block;
+
   min-height: 20px;
   padding-left: 20px;
   margin-top: 10px;
@@ -1769,7 +1769,7 @@ textarea.form-control {
 .radio label,
 .checkbox label {
   display: inline;
-  margin-bottom: 0;
+
   font-weight: normal;
   cursor: pointer;
 }
@@ -4296,10 +4296,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
 
 .navbar-form {
   padding: 10px 15px;
-  margin-top: 8px;
-  margin-right: -15px;
-  margin-bottom: 8px;
-  margin-left: -15px;
+  margin: 8px, -15px, 8px, -15px;
   border-top: 1px solid transparent;
   border-bottom: 1px solid transparent;
   -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1);

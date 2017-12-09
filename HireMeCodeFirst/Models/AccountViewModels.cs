@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace HireMeCodeFirst.Models
@@ -64,6 +65,7 @@ namespace HireMeCodeFirst.Models
 
     public class RegisterViewModel
     {
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
@@ -79,6 +81,10 @@ namespace HireMeCodeFirst.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+        public IEnumerable<UserType> UserTypes { get; set; }
+        [Display(Name = "User Type")]
+        public int UserTypeId { get; set; }
+
     }
 
     public class ResetPasswordViewModel

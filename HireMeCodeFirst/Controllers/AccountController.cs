@@ -149,7 +149,13 @@ namespace HireMeCodeFirst.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            var userTypes = db.UserTypes.ToList();
+            var viewModel = new RegisterViewModel()
+            {
+                UserTypes = userTypes
+            };
+
+            return View(viewModel);
         }
 
         //
@@ -161,7 +167,8 @@ namespace HireMeCodeFirst.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                bool enabled = model.UserTypeId == 2;
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, RegistrationDate = DateTime.Now.Date, UserTypeId = model.UserTypeId, Enabled = enabled};
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

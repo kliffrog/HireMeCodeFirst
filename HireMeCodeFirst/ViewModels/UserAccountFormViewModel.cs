@@ -8,7 +8,7 @@ namespace HireMeCodeFirst.ViewModels
 {
     public class UserAccountFormViewModel
     {
-        public IEnumerable<UserType> UserTypes { get; set; }
-        public UserAccount UserAccount { get; set; }
+        public IEnumerable<ApplicationUser> UserTypes { get; set; }
+        public ApplicationUser UserAccount { get; set; }
     }
 }

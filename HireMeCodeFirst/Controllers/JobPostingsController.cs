@@ -29,10 +29,11 @@ namespace HireMeCodeFirst.Controllers
 
         public ViewResult Index()
         {
-            var jobPostings = db.JobPostings.Include(j => j.Company).Include(j => j.JobLocation).Include(j => j.JobType);
+            var jobPostings = db.JobPostings.Include(j => j.Company).Include(j => j.JobLocation).Include(j => j.JobType).Include(j => j.Company.BusinessIndustry);
+
             if (User.IsInRole(RoleName.CanManagePostings))
             {
-                
+                //System.Web.HttpContext.Current.Response.Write("<SCRIPT LANGUAGE='JavaScript'>alert('Hello this is an Alert')</SCRIPT>");
                 return View(jobPostings.ToList());
             }
             return View("ReadOnlyIndex", jobPostings);
@@ -66,7 +67,7 @@ namespace HireMeCodeFirst.Controllers
         // GET: JobPostings/Create
         public ActionResult Create()
         {
-            ViewBag.Id = new SelectList(db.Companies, "Id", "Name");
+            ViewBag.CompanyId = new SelectList(db.Companies, "Id", "Name");
             ViewBag.JobLocationId = new SelectList(db.JobLocations, "Id", "Address1");
             ViewBag.JobTypeId = new SelectList(db.JobTypes, "Id", "Name");
             ViewBag.UserAccountId = new SelectList(db.UserAccounts, "Id", "Email");
@@ -112,7 +113,7 @@ namespace HireMeCodeFirst.Controllers
 
       
         [HttpPost]
-        public ActionResult Save(JobPosting jobPosting)
+        public ActionResult Save(JobPostingCreate jobPosting)
         {
             /*if (!ModelState.IsValid)
             {
@@ -124,31 +125,34 @@ namespace HireMeCodeFirst.Controllers
                 };
                 return View("JobPostingForm",viewModel);
             }*/
-            if (jobPosting.Id == 0)
-                db.JobPostings.Add(jobPosting);
-            else
+            /*if (jobPosting.Id == 0)
             {
-                var JobPostingInDb = db.JobPostings.Single(c => c.Id == jobPosting.Id);
+                //System.Web.HttpContext.Current.Response.Write("<SCRIPT LANGUAGE='JavaScript'>alert('Hello this is an Alert')</SCRIPT>");
+                db.JobPostings.Add(jobPosting);
+            }
+            else
+            {*/
+                var JobPostingInDb = db.JobPostings.Create();
                 
                 JobPostingInDb.ApplicationInstructions = jobPosting.ApplicationInstructions;
                 JobPostingInDb.ApplicationWebsite = jobPosting.ApplicationWebsite;
-                JobPostingInDb.CompanyId = 1;
+                JobPostingInDb.CompanyId = jobPosting.CompanyId;
                 JobPostingInDb.CreatedDate = DateTime.Now;
-                JobPostingInDb.Enabled = false;
+                JobPostingInDb.Enabled = jobPosting.Enabled;
                 JobPostingInDb.EndDate = jobPosting.EndDate;
                 JobPostingInDb.ExpirationDate = jobPosting.ExpirationDate;
                 JobPostingInDb.HoursPerWeek = jobPosting.HoursPerWeek;
                 JobPostingInDb.JobDescription = jobPosting.JobDescription;
-                JobPostingInDb.JobLocationId = 1;
+                JobPostingInDb.JobLocationId = jobPosting.JobLocationId;
                 JobPostingInDb.JobTitle = jobPosting.JobTitle;
                 JobPostingInDb.JobTypeId = jobPosting.JobTypeId;
                 JobPostingInDb.NumOpenings = jobPosting.NumOpenings;
-                JobPostingInDb.NumViews = 0;
+                JobPostingInDb.NumViews = jobPosting.NumViews;
                 JobPostingInDb.PostingDate = DateTime.Now;
                 JobPostingInDb.StartDate = jobPosting.StartDate;
                 JobPostingInDb.Qualifications = jobPosting.Qualifications;
                 JobPostingInDb.WageSalary = jobPosting.WageSalary;
-            }
+            //}
             db.SaveChanges();
             return RedirectToAction("Index", "JobPostings");
         }

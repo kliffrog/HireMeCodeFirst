@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Data;
 using System.Linq;
 using System.Web;
+using HireMeCodeFirst.Models;
 
-namespace HireMeCodeFirst.Models
+namespace HireMeCodeFirst.ViewModels
 {
-    public class JobPosting
+    public class JobPostingCreate
     {
-        [Key]
-        public int Id { get; set; }
         public JobType JobType { get; set; }
         public int JobTypeId { get; set; }
         public Company Company { get; set; }
@@ -18,17 +16,17 @@ namespace HireMeCodeFirst.Models
         public int CompanyId { get; set; }
         public JobLocation JobLocation { get; set; }
         public int JobLocationId { get; set; }
-        [Display(Name="Date Created")]
+        [Display(Name = "Date Created")]
         public DateTime? CreatedDate { get; set; }
         [Required]
-        [Display(Name="Job Title")]
+        [Display(Name = "Job Title")]
         public string JobTitle { get; set; }
         [Required]
-        [Display(Name ="Job Description")]
+        [Display(Name = "Job Description")]
         public string JobDescription { get; set; }
-        [Display(Name ="Number of Openings")]
+        [Display(Name = "Number of Openings")]
         public int NumOpenings { get; set; }
-        [Display(Name ="Hours Per Week")]
+        [Display(Name = "Hours Per Week")]
         public int HoursPerWeek { get; set; }
         [Display(Name = "Wage/Salary")]
         public decimal WageSalary { get; set; }
@@ -53,6 +51,5 @@ namespace HireMeCodeFirst.Models
         public bool Enabled { get; set; }
         [Display(Name = "Number of Views")]
         public int NumViews { get; set; }
-
     }
 }
