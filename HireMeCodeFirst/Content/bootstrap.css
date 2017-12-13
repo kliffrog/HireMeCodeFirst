@@ -335,13 +335,14 @@ textarea {
 }
 
 a {
-  color: #428bca;
-  text-decoration: none;
+  color: black;
+  text-decoration: underline;
+  font-size: medium;
 }
 
 a:hover,
 a:focus {
-  color: #2a6496;
+  color: #f3cf12;
   text-decoration: underline;
 }
 
@@ -786,6 +787,7 @@ pre code {
 .row {
   margin-right: -15px;
   margin-left: -15px;
+  background-color: #c6d12f;
 }
 
 .row:before,
@@ -1103,9 +1105,11 @@ pre code {
   }
   .col-md-3 {
     width: 25%;
+    
   }
   .col-md-4 {
     width: 33.33333333333333%;
+    background-color:  #c6d12f;
   }
   .col-md-5 {
     width: 41.66666666666667%;
@@ -1244,6 +1248,7 @@ pre code {
 @media (min-width: 1200px) {
   .container {
     max-width: 1170px;
+
   }
   .col-lg-1,
   .col-lg-2,
@@ -1411,6 +1416,7 @@ table {
 
 th {
   text-align: left;
+  background-color: #0094b4;
 }
 
 .table {
@@ -4931,12 +4937,12 @@ a.list-group-item.active > .badge,
   font-weight: 200;
   line-height: 2.1428571435;
   color: inherit;
-  background-color: #eeeeee;
+  background-color: #c6d12f;
 }
 
 .jumbotron h1 {
   line-height: 1;
-  color: #3f7386;
+  color: #f3cf12;
 }
 
 .jumbotron p {
@@ -4945,12 +4951,14 @@ a.list-group-item.active > .badge,
 
 .container .jumbotron {
   border-radius: 6px;
+  background-color: #0094b4;
 }
 
 @media screen and (min-width: 768px) {
   .jumbotron {
     padding-top: 48px;
     padding-bottom: 48px;
+      background-color: #0094b4;
   }
   .container .jumbotron {
     padding-right: 60px;

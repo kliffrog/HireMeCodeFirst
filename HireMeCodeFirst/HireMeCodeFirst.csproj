@@ -193,6 +193,18 @@
     <Compile Include="Migrations\201712040058531_Initial.Designer.cs">
       <DependentUpon>201712040058531_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712131539109_updateJobPostingsKeyGenerated.cs" />
+    <Compile Include="Migrations\201712131539109_updateJobPostingsKeyGenerated.Designer.cs">
+      <DependentUpon>201712131539109_updateJobPostingsKeyGenerated.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712131736534_updateJobPostingsRollback.cs" />
+    <Compile Include="Migrations\201712131736534_updateJobPostingsRollback.Designer.cs">
+      <DependentUpon>201712131736534_updateJobPostingsRollback.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712132225599_addIsCompanyRole.cs" />
+    <Compile Include="Migrations\201712132225599_addIsCompanyRole.Designer.cs">
+      <DependentUpon>201712132225599_addIsCompanyRole.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BusinessIndustry.cs" />
@@ -226,6 +238,10 @@
     <Compile Include="ViewModels\UserAccountFormViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\aspnet-HireMeCodeFirst-20171118020032.mdf" />
+    <Content Include="App_Data\aspnet-HireMeCodeFirst-20171118020032_log.ldf">
+      <DependentUpon>aspnet-HireMeCodeFirst-20171118020032.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap-spacelab.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -301,10 +317,10 @@
     <Content Include="Views\Account\Edit.cshtml" />
     <Content Include="Views\JobPostings\JobSearch.cshtml" />
     <Content Include="Views\JobPostings\SearchDetails.cshtml" />
+    <Content Include="Views\Home\EmployerIndex.cshtml" />
+    <Content Include="Views\JobPostings\EmployerIndex.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -316,6 +332,15 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201712040058531_Initial.resx">
       <DependentUpon>201712040058531_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712131539109_updateJobPostingsKeyGenerated.resx">
+      <DependentUpon>201712131539109_updateJobPostingsKeyGenerated.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712131736534_updateJobPostingsRollback.resx">
+      <DependentUpon>201712131736534_updateJobPostingsRollback.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712132225599_addIsCompanyRole.resx">
+      <DependentUpon>201712132225599_addIsCompanyRole.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -12,7 +12,7 @@
     <div class="row">
 
         <p>
-                Job Title: @Html.TextBox("SearchString", ViewBag.CurrentFilter as String)<input type="submit" value="Search" />
+                Keyword(s): @Html.TextBox("SearchString", ViewBag.CurrentFilter as String)<input type="submit" value="Search" />
             
  <!--           <div class="col-lg-3">
                 Company Name: @Html.TextBox("SearchCompany", ViewBag.CurrentFilter as String)
@@ -24,32 +24,28 @@
 
     if (Model != null)
     {
-        <div class="row">
-            <table class="table-bordered">
+        <table class="table">
+            <tr>
+                <th>@Html.ActionLink("Job Title", "JobSearch", new { sortOrder = ViewBag.SortTitle })</th>
+                <th>Company</th>
+                <th>Job Type</th>
+                <th>@Html.ActionLink("Posting Date", "JobSearch", new { sortOrder = ViewBag.SortDate })</th>
+                <th>Details</th>
+            </tr>
+            @foreach (var item in Model)
+            {
                 <tr>
-                    <th>@Html.ActionLink("Job Title", "JobSearch", new { sortOrder = ViewBag.SortTitle })</th>
-                    <th>Business Industry</th>
-                    <th>Company</th>
-                    <th>Job Type</th>
-                    <th>@Html.ActionLink("Posting Date", "JobSearch", new { sortOrder = ViewBag.SortDate })</th>
-                    <th>Details</th>
+                    <td>@Html.DisplayFor(modelItem => item.JobTitle)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Company.Name)
+                    <td>@Html.DisplayFor(modelItem => item.JobType.Name)</td>
+                    <td>@item.CreatedDate.Value.ToString("MM/dd/yyyy")</td>
+                    <td>@Html.Raw("<a data-modal='' href='/JobPostings/SearchDetails/" + item.Id + "' JobPostingID='" + item.Id + "' title='Detail'> <span class='glyphicon glyphicon-search'> </span> </a>")</td>
+
                 </tr>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>@Html.DisplayFor(modelItem => item.JobTitle)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Company.BusinessIndustry.Name)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Company.Name)
-                        <td>@Html.DisplayFor(modelItem => item.JobType.Name)</td>
-                        <td>@Html.DisplayFor(modelItem => item.CreatedDate)</td>
-                        <td>@Html.Raw("<a data-modal='' href='/JobPostings/SearchDetails/" + item.Id + "' JobPostingID='" + item.Id + "' title='Detail'> <span class='glyphicon glyphicon-search'> </span> </a>")</td>
 
-                    </tr>
+            }
+        </table>
 
-                }
-            </table>
-
-        </div>
     }
 
 

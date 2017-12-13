@@ -7,15 +7,17 @@
 </div>
 
 <div class="row">
-    <div class="col-md-4">
-        <h2>Job Postings</h2>
-        <p>
-            Manage job postings.
-        </p>
-        <p>@Html.ActionLink("View Jobs", "Index", "JobPostings", routeValues: null, htmlAttributes: new { id = "registerLink" })</p>
+    <div class="col-md-3">
     </div>
     <div class="col-md-4">
-        <h2>Users</h2>
+        <h3>Job Postings</h3>
+        <p>
+            Enable, edit, view and create job postings.
+        </p>
+        <p>@Html.ActionLink("View Jobs", "Index", "JobPostings", routeValues: null, htmlAttributes: new {id = "registerLink"})</p>
+    </div>
+    <div class="col-md-4">
+        <h3>Users</h3>
         <p>
             Manage users.
         </p>

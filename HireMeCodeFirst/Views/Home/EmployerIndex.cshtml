@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1 class="text-center">Employer Dashboard</h1>
+</div>
+
+<div class="row">
+    <div class="col-md-3">
+    </div>
+    <div class="col-md-4">
+        <h3>Job Postings</h3>
+        <p>
+            View and create job postings.
+        </p>
+        <p>@Html.ActionLink("View Jobs", "EmployerIndex", "JobPostings", routeValues: null, htmlAttributes: new {id = "registerLink"})</p>
+    </div>
+</div>

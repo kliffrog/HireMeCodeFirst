@@ -1,18 +1,19 @@
 ﻿@model IEnumerable<HireMeCodeFirst.Models.JobPosting>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>AdminIndex</title>
+    <title>Employer Index</title>
 </head>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Postings";
 }
 
-<h2>Index</h2>
+<h2>Job Postings</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
 <table class="table">
     <tr>
         <th>
@@ -60,7 +61,7 @@
             @Html.DisplayFor(modelItem => item.NumViews)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+        @*    @Html.ActionLink("Edit", "Edit", new { id=item.Id })*@ |
             @Html.ActionLink("Details", "SearchDetails", new { id=item.Id }) |
         @*  @Html.ActionLink("Delete", "Delete", new { id=item.Id })*@
         </td>

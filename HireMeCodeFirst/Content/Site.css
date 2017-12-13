@@ -1,4 +1,11 @@
-﻿body 
+﻿#JCCC {
+    yellow: #f3cf12;
+    ltgreen: #c6d12f;
+    blue: #0094b4;
+    dkgreen: #3f7386;
+}
+
+body 
 {
     padding-top: 50px;
     padding-bottom: 20px;

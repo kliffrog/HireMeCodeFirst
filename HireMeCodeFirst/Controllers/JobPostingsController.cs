@@ -36,7 +36,7 @@ namespace HireMeCodeFirst.Controllers
                 return View(jobPostings);
             }
             return View("ReadOnlyIndex", jobPostings);*/
-            return View(db.JobPostings.ToList());
+            return View(db.JobPostings.ToList().OrderBy(c => c.Enabled));
         }
 
         // GET: JobPostings
@@ -72,7 +72,7 @@ namespace HireMeCodeFirst.Controllers
             ViewBag.CompanyId = new SelectList(db.Companies, "Id", "Name");
             ViewBag.JobLocationId = new SelectList(db.JobLocations, "Id", "Address1");
             ViewBag.JobTypeId = new SelectList(db.JobTypes, "Id", "Name");
-            ViewBag.UserAccountId = new SelectList(db.UserAccounts, "Id", "Email");
+
             return View();
         }
 
@@ -83,10 +83,13 @@ namespace HireMeCodeFirst.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "JobTypeId,CompanyId,JobLocationId,UserAccountId,CreatedDate,JobTitle,JobDescription,NumOpenings,HoursPerWeek,WageSalary,StartDate,EndDate,Qualifications,ApplicationInstructions,ApplicationWebsite,PostingDate,ExpirationDate,Enabled,NumViews")] JobPosting jobPosting)
+        public ActionResult Create([Bind(Include = "Id,JobTypeId,CompanyId,JobLocationId,UserAccountId,CreatedDate,JobTitle,JobDescription,NumOpenings,HoursPerWeek,WageSalary,StartDate,EndDate,Qualifications,ApplicationInstructions,ApplicationWebsite,PostingDate,ExpirationDate,Enabled,NumViews")] JobPosting jobPosting)
         {
             if (ModelState.IsValid)
             {
+                int ID = (db.JobPostings.Count() + 1);
+                jobPosting.Id = ID;
+                jobPosting.CreatedDate = DateTime.Now;
                 db.JobPostings.Add(jobPosting);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -95,7 +98,7 @@ namespace HireMeCodeFirst.Controllers
             ViewBag.CompanyId = new SelectList(db.Companies, "Id", "Name", jobPosting.CompanyId);
             ViewBag.JobLocationId = new SelectList(db.JobLocations, "Id", "Address1", jobPosting.JobLocationId);
             ViewBag.JobTypeId = new SelectList(db.JobTypes, "Id", "Name", jobPosting.JobTypeId);
-            //ViewBag.UserAccountId = new SelectList(db.UserAccounts, "Id", "Email");
+            
             return View(jobPosting);
         }
 
@@ -155,7 +158,7 @@ namespace HireMeCodeFirst.Controllers
                 JobPostingInDb.JobTypeId = jobPosting.JobTypeId;
                 JobPostingInDb.NumOpenings = jobPosting.NumOpenings;
                 JobPostingInDb.NumViews = jobPosting.NumViews;
-                JobPostingInDb.PostingDate = DateTime.Now;
+                JobPostingInDb.PostingDate = jobPosting.PostingDate;
                 JobPostingInDb.StartDate = jobPosting.StartDate;
                 JobPostingInDb.Qualifications = jobPosting.Qualifications;
                 JobPostingInDb.WageSalary = jobPosting.WageSalary;
@@ -248,11 +251,12 @@ namespace HireMeCodeFirst.Controllers
 
             ViewBag.CurrentFilter = searchString;
 
-            var postings = from s in db.JobPostings select s;
+            //var postings = from s in db.JobPostings select s;
+            var postings = db.JobPostings.ToList().Where(c => c.Enabled == true);
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                postings = postings.Where(s => s.JobTitle.Contains(searchString));
+                postings = postings.Where(s => s.JobTitle.Contains(searchString) || s.JobDescription.Contains(searchString));
             }
 
             switch (sortOrder)
@@ -264,13 +268,13 @@ namespace HireMeCodeFirst.Controllers
                     postings = postings.OrderBy(s => s.PostingDate);
                     break;
                 case "dateDesc":
-                    postings = postings.OrderByDescending(s => s.PostingDate);
+                    postings = postings.OrderByDescending(s => s.CreatedDate);
                     break;
                 default:
                     postings = postings.OrderBy(s => s.PostingDate);
                     break;
             }
-            int pageSize = 10;
+            int pageSize = 5;
             int pageNumber = (page ?? 1);
             return View(postings.ToPagedList(pageNumber, pageSize));
         }
@@ -321,6 +325,11 @@ namespace HireMeCodeFirst.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult EmployerIndex()
+        {
+            return View(db.JobPostings.ToList().OrderBy(c => c.CompanyId));
         }
     }
 }
