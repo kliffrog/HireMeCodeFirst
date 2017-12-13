@@ -15,6 +15,9 @@ namespace HireMeCodeFirst.Models
         public int UserAccountId { get; set; }
         public JobPosting JobPosting { get; set; }
         public int JobPostingId { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Apply Date")]
         public DateTime ApplyDate { get; set; }
         public JobApplicationStatus JobApplicationStatus { get; set; }
         public int JobApplicationStatusId { get; set; }

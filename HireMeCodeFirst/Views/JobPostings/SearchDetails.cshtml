@@ -5,24 +5,30 @@
 }
 
 <div>
-    <h2>Company Details</h2>
+    <h2>Posting Details</h2>
     <hr />
     <dl class="dl-horizontal">
 
-        
         <dt>
-            @Html.DisplayNameFor(model => model.Company.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Company.Name)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.JobTitle)
+            @Html.LabelFor(model => model.JobTitle)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.JobTitle)
+        </dd>        
+        <dt>
+            @Html.LabelFor(model => model.Company.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayTextFor(model => model.Company.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.JobType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JobType.Name)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Company.BusinessIndustry.Name)
@@ -32,20 +38,14 @@
             @Html.DisplayFor(model => model.Company.BusinessIndustry.Name)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatedDate)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.CreatedDate)
-        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.JobDescription)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.JobDescription)
+            @Html.TextAreaFor(model => model.JobDescription,10,50,"")
         </dd>
 
        
@@ -73,21 +73,7 @@
             @Html.DisplayFor(model => model.WageSalary)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.StartDate)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.StartDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.EndDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.EndDate)
-        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.Qualifications)
@@ -112,7 +98,29 @@
         <dd>
             @Html.DisplayFor(model => model.ApplicationWebsite)
         </dd>
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </dt>
 
+        <dd>
+            @Html.DisplayFor(model => model.CreatedDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EndDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EndDate)
+        </dd>
         <dt>
             @Html.DisplayNameFor(model => model.ExpirationDate)
         </dt>
@@ -121,13 +129,7 @@
             @Html.DisplayFor(model => model.ExpirationDate)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.JobType)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.JobType)
-        </dd>
 
     </dl>
 </div>

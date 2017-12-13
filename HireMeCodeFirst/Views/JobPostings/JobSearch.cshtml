@@ -1,68 +1,47 @@
-﻿@model HireMeCodeFirst.ViewModels.SearchViewModel
+﻿@model PagedList.IPagedList<HireMeCodeFirst.Models.JobPosting>
 @using PagedList.Mvc;
    
 
 @{
     ViewBag.Title = "JobSearch";
 }
-
-
-
 @using (Html.BeginForm("JobSearch", "JobPostings", FormMethod.Get))
 {
     <div style="border-bottom:1px solid #bbb"><h1>Job Search</h1></div>
 
     <div class="row">
 
-        <div class="form-horizontal">
-            <div class="col-lg-3">
-                @Html.TextBoxFor(m => m.JobTitle, new { @class = "form-control", @placeholder = "Job Title" })
-            </div>
-            <div class="col-lg-3">
-                @Html.TextBoxFor(m => m.Company.Name, new { @class = "form-control", @placeholder = "Company" })
-            </div>
-            <div class="col-lg-3">
-                @Html.TextBoxFor(m => m.JobType.Name, new { @class = "form-control", @placeholder = "Job Type" })
-            </div>
-            <div class="col-md-push-5">
-                @Html.DropDownListFor(m => m.Company.BusinessIndustry.Name, new SelectList(ViewBag.IndustriesIndustryName, "Value", "Text"),
-                "All Categories", new { @class = "form-control", @placeholder = "Your Major/Industry" })
-
-            </div>
-            <div class="col-md-push-5">
-                <button type="submit" class="btn btn-success">
-                    <span class="glyphicon glyphicon-search"></span>
-                </button>
-
-
-            </div>
-        </div>
-
-
-
+        <p>
+                Job Title: @Html.TextBox("SearchString", ViewBag.CurrentFilter as String)<input type="submit" value="Search" />
+            
+ <!--           <div class="col-lg-3">
+                Company Name: @Html.TextBox("SearchCompany", ViewBag.CurrentFilter as String)
+                <input type="submit" value="Search" />
+            </div>-->
+        </p>
     </div>
 
 
-    if (Model.JobPostings != null)
+    if (Model != null)
     {
         <div class="row">
-            <table class="table" style="width:500px;">
+            <table class="table-bordered">
                 <tr>
-                    <th>Job Title</th>
-                    <th>Industry</th>
+                    <th>@Html.ActionLink("Job Title", "JobSearch", new { sortOrder = ViewBag.SortTitle })</th>
+                    <th>Business Industry</th>
                     <th>Company</th>
                     <th>Job Type</th>
-                    <th>Date</th>
+                    <th>@Html.ActionLink("Posting Date", "JobSearch", new { sortOrder = ViewBag.SortDate })</th>
                     <th>Details</th>
                 </tr>
-                @foreach (var item in Model.JobPostings)
+                @foreach (var item in Model)
                 {
                     <tr>
-                        <td>@item.JobTitle</td>
-                        <td>@item.Company.BusinessIndustry.Name</td>
-                        <td>@item.Company.Name</td>
-                        <td>@item.JobType.Name</td>
-                        <td>@item.CreatedDate</td>
+                        <td>@Html.DisplayFor(modelItem => item.JobTitle)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Company.BusinessIndustry.Name)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Company.Name)
+                        <td>@Html.DisplayFor(modelItem => item.JobType.Name)</td>
+                        <td>@Html.DisplayFor(modelItem => item.CreatedDate)</td>
                         <td>@Html.Raw("<a data-modal='' href='/JobPostings/SearchDetails/" + item.Id + "' JobPostingID='" + item.Id + "' title='Detail'> <span class='glyphicon glyphicon-search'> </span> </a>")</td>
 
                     </tr>
@@ -77,3 +56,7 @@
 
 }
 
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("JobSearch",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

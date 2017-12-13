@@ -11,44 +11,60 @@ namespace HireMeCodeFirst.Models
     {
         [Key]
         public int Id { get; set; }
-        public JobType JobType { get; set; }
+        public virtual JobType JobType{ get; set; }
         public int JobTypeId { get; set; }
-        public Company Company { get; set; }
+        public virtual Company Company{ get; set; }
         [Display(Name = "Company Name")]
         public int CompanyId { get; set; }
-        public JobLocation JobLocation { get; set; }
+        public virtual JobLocation JobLocation{ get; set; }
         public int JobLocationId { get; set; }
-        [Display(Name="Date Created")]
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Display(Name="Last Modified")]
         public DateTime? CreatedDate { get; set; }
+
         [Required]
         [Display(Name="Job Title")]
         public string JobTitle { get; set; }
+
         [Required]
         [Display(Name ="Job Description")]
         public string JobDescription { get; set; }
+
         [Display(Name ="Number of Openings")]
         public int NumOpenings { get; set; }
+
         [Display(Name ="Hours Per Week")]
         public int HoursPerWeek { get; set; }
+
         [Display(Name = "Wage/Salary")]
         public decimal WageSalary { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Start Date")]
-        [DataType(DataType.Date)]
         public DateTime? StartDate { get; set; }
-        [Display(Name = "End Date")]
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Display(Name = "End Date")]
         public DateTime? EndDate { get; set; }
+
         public string Qualifications { get; set; }
         [Display(Name = "Application Instructions")]
         public string ApplicationInstructions { get; set; }
+
         [Display(Name = "Application Website")]
         public string ApplicationWebsite { get; set; }
-        [Display(Name = "Posting Date")]
+
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Posting Date")]
         public DateTime? PostingDate { get; set; }
 
-        [Display(Name = "Expiration Date")]
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Expiration Date")]
         public DateTime? ExpirationDate { get; set; }
         public bool Enabled { get; set; }
         [Display(Name = "Number of Views")]

@@ -27,22 +27,22 @@ namespace HireMeCodeFirst.Controllers
 
         
 
-        public ViewResult Index()
+        public ActionResult Index()
         {
-            var jobPostings = db.JobPostings.Include(j => j.Company).Include(j => j.JobLocation).Include(j => j.JobType).Include(j => j.Company.BusinessIndustry);
-
+           /* var jobPostings = db.JobPostings.Include(j => j.Company).Include(j => j.JobLocation).Include(j => j.JobType).Include(j => j.Company.BusinessIndustry).ToList().OrderBy(c => c.Enabled);
+            
             if (User.IsInRole(RoleName.CanManagePostings))
             {
-                //System.Web.HttpContext.Current.Response.Write("<SCRIPT LANGUAGE='JavaScript'>alert('Hello this is an Alert')</SCRIPT>");
-                return View(jobPostings.ToList());
+                return View(jobPostings);
             }
-            return View("ReadOnlyIndex", jobPostings);
+            return View("ReadOnlyIndex", jobPostings);*/
+            return View(db.JobPostings.ToList());
         }
 
         // GET: JobPostings
         /*public ActionResult Index()
         {
-            var jobPostings = db.JobPostings.Include(j => j.Company).Include(j => j.JobLocation).Include(j => j.JobType).Include(j => j.UserAccount);
+            var jobPostings = db.JobPostings.Include(j => j.Company).Include(j => j.JobLocation).Include(j => j.JobType).Include(j => j.Company.BusinessIndustry);
             return View(jobPostings.ToList());
         }*/
 
@@ -54,11 +54,13 @@ namespace HireMeCodeFirst.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            JobPosting jobPosting = db.JobPostings.Find(id);
+            JobPosting jobPosting = db.JobPostings.Include(j => j.Company).Include(j => j.JobLocation).Include(j => j.JobType).Single(j => j.Id == id);
+            
             if (jobPosting == null)
             {
                 return HttpNotFound();
             }
+
             return View(jobPosting);
         }
 
@@ -81,7 +83,7 @@ namespace HireMeCodeFirst.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,JobTypeId,CompanyId,JobLocationId,UserAccountId,CreatedDate,JobTitle,JobDescription,NumOpenings,HoursPerWeek,WageSalary,StartDate,EndDate,Qualifications,ApplicationInstructions,ApplicationWebsite,PostingDate,ExpirationDate,Enabled,NumViews")] JobPosting jobPosting)
+        public ActionResult Create([Bind(Include = "JobTypeId,CompanyId,JobLocationId,UserAccountId,CreatedDate,JobTitle,JobDescription,NumOpenings,HoursPerWeek,WageSalary,StartDate,EndDate,Qualifications,ApplicationInstructions,ApplicationWebsite,PostingDate,ExpirationDate,Enabled,NumViews")] JobPosting jobPosting)
         {
             if (ModelState.IsValid)
             {
@@ -90,9 +92,10 @@ namespace HireMeCodeFirst.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Id = new SelectList(db.Companies, "Id", "Name", jobPosting.Id);
+            ViewBag.CompanyId = new SelectList(db.Companies, "Id", "Name", jobPosting.CompanyId);
             ViewBag.JobLocationId = new SelectList(db.JobLocations, "Id", "Address1", jobPosting.JobLocationId);
             ViewBag.JobTypeId = new SelectList(db.JobTypes, "Id", "Name", jobPosting.JobTypeId);
+            //ViewBag.UserAccountId = new SelectList(db.UserAccounts, "Id", "Email");
             return View(jobPosting);
         }
 
@@ -101,10 +104,12 @@ namespace HireMeCodeFirst.Controllers
         {
             var jobTypes = db.JobTypes.ToList();
             var jobLocations = db.JobLocations.ToList();
+            var companies = db.Companies.ToList();
             var viewModel = new PostingFormViewModel
             {
                 JobTypes = jobTypes,
-                JobLocations = jobLocations
+                JobLocations = jobLocations,
+                Company = companies
             };
 
             return View("JobPostingForm", viewModel);
@@ -113,7 +118,9 @@ namespace HireMeCodeFirst.Controllers
 
       
         [HttpPost]
-        public ActionResult Save(JobPostingCreate jobPosting)
+        
+
+        public ActionResult Save(JobPosting jobPosting)
         {
             /*if (!ModelState.IsValid)
             {
@@ -125,14 +132,14 @@ namespace HireMeCodeFirst.Controllers
                 };
                 return View("JobPostingForm",viewModel);
             }*/
-            /*if (jobPosting.Id == 0)
+            if (jobPosting.Id == 0)
             {
                 //System.Web.HttpContext.Current.Response.Write("<SCRIPT LANGUAGE='JavaScript'>alert('Hello this is an Alert')</SCRIPT>");
                 db.JobPostings.Add(jobPosting);
             }
             else
-            {*/
-                var JobPostingInDb = db.JobPostings.Create();
+            {
+                var JobPostingInDb = db.JobPostings.Single(c => c.Id == jobPosting.Id);
                 
                 JobPostingInDb.ApplicationInstructions = jobPosting.ApplicationInstructions;
                 JobPostingInDb.ApplicationWebsite = jobPosting.ApplicationWebsite;
@@ -152,7 +159,7 @@ namespace HireMeCodeFirst.Controllers
                 JobPostingInDb.StartDate = jobPosting.StartDate;
                 JobPostingInDb.Qualifications = jobPosting.Qualifications;
                 JobPostingInDb.WageSalary = jobPosting.WageSalary;
-            //}
+            }
             db.SaveChanges();
             return RedirectToAction("Index", "JobPostings");
         }
@@ -224,37 +231,69 @@ namespace HireMeCodeFirst.Controllers
             return RedirectToAction("Index");
         }
 
-      
+        // GET: JobPosting
+        public ViewResult JobSearch(string sortOrder, string currentFilter, string searchString, int? page)
+        {
+            ViewBag.SortTitle = String.IsNullOrEmpty(sortOrder) ? "titleDesc" : "";
+            ViewBag.SortDate = sortOrder == "Date" ? "dateDesc" : "Date";
 
-          public ActionResult JobSearch()
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            var postings = from s in db.JobPostings select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                postings = postings.Where(s => s.JobTitle.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "titleDesc":
+                    postings = postings.OrderByDescending(s => s.JobTitle);
+                    break;
+                case "Date":
+                    postings = postings.OrderBy(s => s.PostingDate);
+                    break;
+                case "dateDesc":
+                    postings = postings.OrderByDescending(s => s.PostingDate);
+                    break;
+                default:
+                    postings = postings.OrderBy(s => s.PostingDate);
+                    break;
+            }
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            return View(postings.ToPagedList(pageNumber, pageSize));
+        }
+
+       /*   public ActionResult JobSearch()
            {
-               //Bind Industry drop down in search
-
-               ViewBag.IndustriesIndustryName = new SelectList(db.BusinessIndustries, "Name", "Name");
-            
-
+                //Bind Industry drop down in search
+                ViewBag.Companies = new SelectList(db.Companies, "Name", "Name");
+                ViewBag.IndustriesIndustryName = new SelectList(db.BusinessIndustries, "Name", "Name");
+                ViewBag.JobType = new SelectList(db.JobTypes, "Name", "Name");
            var model = new SearchViewModel();
-
-           
-
-
                 var results = db.JobPostings.Include(j => j.Company).Include(j => j.JobLocation).Include(j => j.JobType).Include(j => j.Company.BusinessIndustry)
                     .Where(
                 p =>
-                
                 (model.JobTitle == null || p.JobTitle.StartsWith(model.JobTitle))
                 && (model.Company.BusinessIndustry.Name == null || p.Company.BusinessIndustry.Name == model.Company.BusinessIndustry.Name)
                 && (model.Company.Name == null || p.Company.Name.Equals(model.Company.Name))
                 && (model.JobType.Name == null || p.JobType.Name.StartsWith(model.JobType.Name)))
-
-                        
                         .OrderBy(p => p.CreatedDate);
-   
-            
 
             return View(model);
           
-           }
+           }*/
 
        
 

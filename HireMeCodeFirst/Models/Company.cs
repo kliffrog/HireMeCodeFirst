@@ -12,12 +12,16 @@ namespace HireMeCodeFirst.Models
         public int Id { get; set; }
         public UserAccount UserAccount { get; set; }
         public string UserAccountId { get; set; }
+
         [Display(Name="Company Name")]
         public string Name { get; set; }
 
         public string Description { get; set; }
-        public BusinessIndustry BusinessIndustry { get; set; }
+        public virtual BusinessIndustry BusinessIndustry{ get; set; }
         public int BusinessIndustryId { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name="Date Established")]
         public DateTime EstablishmentDate { get; set; }
         public string Website { get; set; }

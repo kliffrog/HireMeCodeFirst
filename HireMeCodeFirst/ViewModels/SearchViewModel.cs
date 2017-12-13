@@ -14,7 +14,7 @@ namespace HireMeCodeFirst.ViewModels
        
         [DataType(DataType.Date)]
         [Display(Name = "Created Date")]
-        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public DateTime? CreatedDate { get; set; }
 
         [StringLength(75)]
         [Display(Name = "Job Description")]
@@ -25,21 +25,21 @@ namespace HireMeCodeFirst.ViewModels
         public string JobTitle { get; set; }
 
         [Display(Name = "Number of Openings")]
-        public Nullable<int> NumOpenings { get; set; }
+        public int? NumOpenings { get; set; }
 
         [Display(Name = "Hours Per Week")]
-        public Nullable<int> HoursPerWeek { get; set; }
+        public int? HoursPerWeek { get; set; }
 
         [Display(Name = "Salary")]
-        public Nullable<decimal> WageSalary { get; set; }
+        public decimal? WageSalary { get; set; }
 
         [DataType(DataType.Date)]
         [Display(Name = "Start Date")]
-        public Nullable<System.DateTime> StartDate { get; set; }
+        public DateTime? StartDate { get; set; }
 
         [DataType(DataType.Date)]
         [Display(Name = "End Date")]
-        public Nullable<System.DateTime> EndDate { get; set; }
+        public DateTime? EndDate { get; set; }
 
         [StringLength(300)]
         [Display(Name = "Job Qualifications")]
@@ -55,7 +55,7 @@ namespace HireMeCodeFirst.ViewModels
 
         [DataType(DataType.Date)]
         [Display(Name = "Expiration Date")]
-        public Nullable<System.DateTime> ExpirationDate { get; set; }
+        public DateTime? ExpirationDate { get; set; }
 
       
         public string SearchButton { get; set; }
@@ -63,7 +63,7 @@ namespace HireMeCodeFirst.ViewModels
 
         public JobType JobType { get; set; }
         public JobLocation JobLocation { get; set; }
-        public IPagedList <JobPosting> JobPostings { get; set; }
+        public IEnumerable <JobPosting> JobPostings { get; set; }
         public Company Company { get; set; }
         public BusinessIndustry BusinessIndusty { get; set; }
 

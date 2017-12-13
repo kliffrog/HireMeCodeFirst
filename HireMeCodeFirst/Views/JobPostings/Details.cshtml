@@ -15,7 +15,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Company.Name)
+            @Html.DisplayNameFor(model => model.Company.Name)
         </dd>
 
         <dt>
@@ -55,7 +55,7 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.JobDescription)
+            @Html.TextAreaFor(model => model.JobDescription,10,50,"")
         </dd>
 
         <dt>

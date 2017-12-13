@@ -8,9 +8,11 @@ namespace HireMeCodeFirst.ViewModels
 {
     public class PostingFormViewModel
     {
+        internal List<Company> Companies;
+
         public IEnumerable<JobType> JobTypes { get; set; }
         public IEnumerable<JobLocation> JobLocations { get; set; }
         public JobPosting JobPosting { get; set; }
-        public Company Company { get; set; }
+        public IEnumerable<Company> Company { get; set; }
     }
 }

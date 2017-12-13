@@ -13,7 +13,15 @@ namespace HireMeCodeFirst.Models
         public UserAccount UserAccount { get; set; }
         public int UserAccountId { get; set; }
         public bool CurrentJob { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Start Date")]
         public DateTime StartDate { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Display(Name = "End Date")]
         public DateTime EndDate { get; set; }
         public string JobTitle { get; set; }
         public string CompanyName { get; set; }
